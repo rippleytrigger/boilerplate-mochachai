@@ -94,9 +94,22 @@ suite('Functional Tests with Zombie.js', function () {
   suite('"Famous Italian Explorers" form', function () {
     // #5
     test('Submit the surname "Colombo" in the HTML form', function (done) {
-      assert.fail();
 
-      done();
+        const browser = new Browser();
+
+        browser.visit('https://boilerplate-mochachai--rippleytrigger.replit.app', function () {
+
+        browser.fill('surname', 'Colombo');
+        browser.pressButton('submit', function () {
+
+          browser.assert.success();
+          assert.equal(browser.text('span#name'), 'Cristoforo');
+          assert.equal(browser.text('span#surname'), 'Colombo');
+          assert.equal(browser.queryAll('span#dates').length, 1);
+
+          done();
+        });
+      });
     });
     // #6
     test('Submit the surname "Vespucci" in the HTML form', function (done) {
