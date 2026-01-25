@@ -79,7 +79,15 @@ suite('Functional Tests with Zombie.js', function () {
 
   suite('Headless browser', function () {
     test('should have a working "site" property', function() {
+      const browser = new Browser();
+
+      browser.site = 'https://boilerplate-mochachai--rippleytrigger.replit.app'; // Your URL here
+
       assert.isNotNull(browser.site);
+
+      suiteSetup(function(done) {
+        return browser.visit('/', done);
+      });
     });
   });
 
